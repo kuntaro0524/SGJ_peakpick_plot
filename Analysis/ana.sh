@@ -10,8 +10,8 @@ logname=$prefix.log
 echo "Writing" $logname
 
 #/oys/xtal/cheetah-eiger-zmq/eiger-zmq/bin/cheetah.local $eachfile > $logname
-/oys/xtal/cheetah-eiger-zmq/eiger-zmq/bin/cheetah.local $eachfile  --params="cheetah.MinPixCount=4" --params="cheetah.MaxPixCount=20" --params="cheetah.MinSNR=1.9" > $logname
+/oys/xtal/cheetah-eiger-zmq/eiger-zmq/bin/cheetah.local $eachfile --nproc=32 --params="cheetah.MinPixCount=4" --params="cheetah.MaxPixCount=20" --params="cheetah.MinSNR=1.9" > $logname
 
 done
 
-python /data01/SGJ/211127-BL19XU/Scripts/read_log.py
+python /data01/SGJ/211127-BL19XU/Scripts/Analysis/read_log.py
