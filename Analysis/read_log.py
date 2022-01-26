@@ -6,6 +6,8 @@ import seaborn as sns
 #cheetah_logs = glob.glob("*001*master.log")
 cheetah_logs = glob.glob("*master.log")
 
+score_thresh = int(sys.argv[1])
+
 # cheetah のログファイルを読んでフレーム番号でソートする
 def read_log(filename):
     data_line=[]
@@ -91,16 +93,13 @@ import pandas as pd
 # X,Y, Score という配列をPandas data frame へ変換
 df = pd.DataFrame.from_dict((new_map))
 print(df)
-df.columns = ['X_value','Y_value','Z_value']
-df['Z_value'] = pd.to_numeric(df['Z_value'])
-df['X_value'] = pd.to_numeric(df['X_value'])
+df.columns = ['Y_value','Z_value','score']
+df['score'] = pd.to_numeric(df['score'])
 df['Y_value'] = pd.to_numeric(df['Y_value'])
+df['Z_value'] = pd.to_numeric(df['Z_value'])
 
-pivotted= df.pivot('Y_value','X_value','Z_value')
+pivotted= df.pivot('Z_value','Y_value','score')
 sns.heatmap(pivotted,cmap='RdBu')
-
-# Making the final map .csv
-df.to_csv("test.csv")
 
 plt.savefig("ana_ooo.png")
 plt.show()
@@ -111,9 +110,23 @@ plt.show()
 
 # Z value があるしきい値よりも高い場合のもののみ dataframeを取り出す
 df_new = df.copy()
-z_sel = df_new['Z_value']<3
-df_new.loc[z_sel,'Z_value']=0
+df_new.describe()
+z_sel = df_new['score']<3
+df_new.loc[z_sel,'score']=0
 
-pivotted= df_new.pivot('Y_value','X_value','Z_value')
+pivotted= df_new.pivot('Z_value','Y_value','score')
 sns.heatmap(pivotted,cmap='RdBu')
 plt.savefig("ana_iii.png")
+
+# Making the final map .csv for the data collection with AMANE
+df_for_csv = df.copy()
+z_sel = df_for_csv['score']> score_thresh
+df_final = df_for_csv[z_sel]
+
+print(df_final)
+
+
+# カラムの名前を理解できるものにつけ直す
+df_exc = df_final.loc[:, ['score', 'Y_value', 'Z_value']]
+#df_final.reindex(index=['score', 'Y_value', 'Z_value'])
+df_exc.to_csv("meas.csv",index=False)
