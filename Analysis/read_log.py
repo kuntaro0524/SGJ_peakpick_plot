@@ -125,7 +125,6 @@ df_final = df_for_csv[z_sel]
 
 print(df_final)
 
-
 # カラムの名前を理解できるものにつけ直す
 df_exc = df_final.loc[:, ['score', 'Y_value', 'Z_value']]
 #df_final.reindex(index=['score', 'Y_value', 'Z_value'])

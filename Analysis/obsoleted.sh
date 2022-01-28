@@ -14,28 +14,21 @@ for hd5file in $hd5files; do
 let h5_counter++
 done
 
+echo $h5_counter Exists!
+
 if [ $h5_counter -eq 0 ]; then
     echo "No files!"
 else
     echo "Process will start!"
-
-    echo "FILENAME=" $hd5file
-    echo "PREFIX=" $prefix
-    echo "LOGIFLE=" $logname
-
-for hd5file in $hd5files; do
     # PREFIX
     prefix=${hd5file%.*}
     # Log file name
-    logname="$prefix.log"
+    logname="$PREFIX.log"
 
+    echo "Process has started $hd5file"
 /oys/xtal/cheetah-eiger-zmq/eiger-zmq/bin/cheetah.local $hd5file --nproc=32 --params="cheetah.MinPixCount=4" --params="cheetah.MaxPixCount=30" --params="LocalBGRadius=20" --params="cheetah.MinSNR=3.5" > $logname
-
-done
-
-#python /data01/SGJ/211127-BL19XU/Scripts/Analysis/read_log.py
-cd $wd
-python /data01/SGJ/220128-BL19XU/Scripts/read_log.py
+    cd $wd
+python /data01/SGJ/211127-BL19XU/Scripts/Analysis/read_log.py
 # Back to the root directory
 cd $root_dir/
 
