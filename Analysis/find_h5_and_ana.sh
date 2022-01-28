@@ -14,28 +14,29 @@ for hd5file in $hd5files; do
 let h5_counter++
 done
 
+# hd5 fileの数を数えている
 if [ $h5_counter -eq 0 ]; then
-    echo "No files!"
+    echo "No .hd5 files in $wd!"
+    exit 1
 else
     echo "Process will start!"
 
-    echo "FILENAME=" $hd5file
-    echo "PREFIX=" $prefix
-    echo "LOGIFLE=" $logname
+    # Loop to generate 'cheetah log' in the working directory
+    # at the same path where the .hd5 files exist
 
 for hd5file in $hd5files; do
-    # PREFIX
+    # PREFIX (bash style)
     prefix=${hd5file%.*}
     # Log file name
     logname="$prefix.log"
-
+    # Main loop
 /oys/xtal/cheetah-eiger-zmq/eiger-zmq/bin/cheetah.local $hd5file --nproc=32 --params="cheetah.MinPixCount=4" --params="cheetah.MaxPixCount=30" --params="LocalBGRadius=20" --params="cheetah.MinSNR=3.5" > $logname
 
 done
 
-#python /data01/SGJ/211127-BL19XU/Scripts/Analysis/read_log.py
 cd $wd
 python /data01/SGJ/220128-BL19XU/Scripts/read_log.py
+
 # Back to the root directory
 cd $root_dir/
 
@@ -43,3 +44,4 @@ fi
 
 echo $wd
 done
+
