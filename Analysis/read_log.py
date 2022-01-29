@@ -101,8 +101,9 @@ df['Z_value'] = pd.to_numeric(df['Z_value'])
 pivotted= df.pivot('Z_value','Y_value','score')
 sns.heatmap(pivotted,cmap='RdBu')
 
-plt.savefig("ana_ooo.png")
-plt.show()
+plt.savefig("heatmap_original.png")
+plt.clf()
+#plt.show()
 
 # 一応、整数座標とYZ座標（あまねそふと）が対応していることは確認した
 # 2022/01/26
@@ -116,7 +117,7 @@ df_new.loc[z_sel,'score']=0
 
 pivotted= df_new.pivot('Z_value','Y_value','score')
 sns.heatmap(pivotted,cmap='RdBu')
-plt.savefig("ana_iii.png")
+plt.savefig("heatmap_threshold.png")
 
 # Making the final map .csv for the data collection with AMANE
 df_for_csv = df.copy()

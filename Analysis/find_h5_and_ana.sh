@@ -19,23 +19,32 @@ if [ $h5_counter -eq 0 ]; then
     echo "No .hd5 files in $wd!"
     exit 1
 else
-    echo "Process will start!"
+    echo "Checking the status of the data processing..."
 
+    # 解析後のログファイルの数を数える
+    n_logfiles=`find $wd -name '*master*.log'|wc -l`
+
+    if [ $h5_counter -ne $n_logfiles ]; then
     # Loop to generate 'cheetah log' in the working directory
     # at the same path where the .hd5 files exist
 
-for hd5file in $hd5files; do
-    # PREFIX (bash style)
-    prefix=${hd5file%.*}
-    # Log file name
-    logname="$prefix.log"
-    # Main loop
-/oys/xtal/cheetah-eiger-zmq/eiger-zmq/bin/cheetah.local $hd5file --nproc=32 --params="cheetah.MinPixCount=4" --params="cheetah.MaxPixCount=30" --params="LocalBGRadius=20" --params="cheetah.MinSNR=3.5" > $logname
+	for hd5file in $hd5files; do
+    		# PREFIX (bash style)
+    		prefix=${hd5file%.*}
+    		# Log file name
+    		logname="$prefix.log"
+    		# Main loop
+		/oys/xtal/cheetah-eiger-zmq/eiger-zmq/bin/cheetah.local $hd5file --nproc=32 --params="cheetah.MinPixCount=4" --params="cheetah.MaxPixCount=30" --params="LocalBGRadius=20" --params="cheetah.MinSNR=3.5" > $logname
 
-done
+	done
 
-cd $wd
-python /data01/SGJ/220128-BL19XU/Scripts/read_log.py
+	cd $wd
+	python /data01/SGJ/220128-BL19XU/Scripts/read_log.py
+
+    else
+	    echo "Analysis had been done"
+	    echo "Skipping the process"
+    fi
 
 # Back to the root directory
 cd $root_dir/
