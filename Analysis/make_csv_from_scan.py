@@ -3,9 +3,15 @@ import numpy as np
 from matplotlib import pyplot as plt
 import seaborn as sns
 
-#cheetah_logs = glob.glob("*001*master.log")
-cheetah_logs = glob.glob("*master.log")
+# 絶対パスから２個上くらいのパスを取得する
+# CSVファイルにそういうパスを書く必要があるため→おまじない・・・
+abs_path = os.path.abspath("./")
+path_parts = abs_path.split('/')
+relative_path = ""
+for p in path_parts[-2:]:
+    relative_path = os.path.join(relative_path,p)
 
+cheetah_logs = glob.glob("*master.log")
 score_thresh = int(sys.argv[1])
 
 # cheetah のログファイルを読んでフレーム番号でソートする
@@ -126,6 +132,15 @@ df_final = df_for_csv[z_sel]
 print(df_final)
 
 # カラムの名前を理解できるものにつけ直す
-df_exc = df_final.loc[:, ['score', 'Y_value', 'Z_value']]
-#df_final.reindex(index=['score', 'Y_value', 'Z_value'])
-df_exc.to_csv("meas.csv",index=False)
+df.to_csv("all_results.csv",index=False)
+
+# 行ごとに処理をしてCSVファイルを作成する
+csv_name = "collect_list.csv"
+csvfile = open(csv_name,"w")
+
+for index,row in df_final.iterrows():
+    int_z = int(row['Z_value'])
+    int_y = int(row['Y_value'])
+    int_score = int(row['score'])
+    filename = "%s/osc_%s_%s.cbf" % (relative_path, int_y, int_z)
+    csvfile.write("%s, %s, %s, %s\n" % (filename, int_score, int_y, int_z ));

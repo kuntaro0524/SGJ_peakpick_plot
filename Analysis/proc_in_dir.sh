@@ -1,8 +1,8 @@
 #!/bin/bash
-code_files=`find . -name 'coordinate.log'`
-root_dir=$PWD
+# comments
+# root_dir: external setting with 'environment variants'
+# code_file: 'coordinate.log' from AMANE with its absolute path
 
-for code_file in $code_files; do
 wd=${code_file%/*}
 
 # Find hd5 files
@@ -27,16 +27,17 @@ else
     		logname="$prefix.log"
 
 		if [ ! -e $logname ]; then
+			echo "Now processing $hd5file"
 			/oys/xtal/cheetah-eiger-zmq/eiger-zmq/bin/cheetah.local $hd5file --nproc=32 --params="cheetah.MinPixCount=4" --params="cheetah.MaxPixCount=30" --params="LocalBGRadius=20" --params="cheetah.MinSNR=3.5" > $logname
 		else
 			echo "Already processed."
 		fi
 	done
 
+	echo "Changing directory to $wd"
 	cd $wd
 	ls heatmap_*.png
 	if [ ! -e "heatmap_original.png" ] && [ ! -e "heatmap_threshold.png" ]; then
-		echo "Doing Doing"
 		python /data01/SGJ/220128-BL19XU/Scripts/Analysis/read_log.py 2
 	else
 		echo "Plot analysis was finished already."
@@ -46,7 +47,3 @@ else
 cd $root_dir/
 
 fi
-
-echo $wd
-done
-
