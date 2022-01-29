@@ -36,12 +36,10 @@ else
 
 	echo "Changing directory to $wd"
 	cd $wd
-	ls heatmap_*.png
-	if [ ! -e "heatmap_original.png" ] && [ ! -e "heatmap_threshold.png" ]; then
-		python /data01/SGJ/220128-BL19XU/Scripts/Analysis/read_log.py 2
-	else
+	#if [ ! -e "heatmap_original.png" ] && [ ! -e "heatmap_threshold.png" ]; then
+	python /data01/SGJ/220128-BL19XU/Scripts/Analysis/make_csv_from_scan.py 3
+	#else
 		echo "Plot analysis was finished already."
-	fi
 
 # Back to the root directory
 cd $root_dir/
