@@ -106,6 +106,7 @@ df['Z_value'] = pd.to_numeric(df['Z_value'])
 pivotted= df.pivot('Z_value','Y_value','score')
 sns.heatmap(pivotted,cmap='RdBu')
 
+plt.subplots_adjust(bottom=0.2)
 plt.savefig("heatmap_original.png")
 plt.clf()
 #plt.show()
@@ -121,6 +122,7 @@ z_sel = df_new['score']<3
 df_new.loc[z_sel,'score']=0
 
 pivotted= df_new.pivot('Z_value','Y_value','score')
+plt.subplots_adjust(bottom=0.2)
 sns.heatmap(pivotted,cmap='RdBu')
 plt.savefig("heatmap_threshold.png")
 
@@ -128,8 +130,6 @@ plt.savefig("heatmap_threshold.png")
 df_for_csv = df.copy()
 z_sel = df_for_csv['score']> score_thresh
 df_final = df_for_csv[z_sel]
-
-print(df_final)
 
 # カラムの名前を理解できるものにつけ直す
 df.to_csv("all_results.csv",index=False)

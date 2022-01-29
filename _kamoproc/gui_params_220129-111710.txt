@@ -1,0 +1,64 @@
+# Command-line args:
+# kamo bl=32xu
+
+topdir = "/data01/SGJ/220128-BL19XU/Scripts"
+include_dir = None
+exclude_dir = None
+workdir = "/data01/SGJ/220128-BL19XU/Scripts/_kamoproc"
+adxv = None
+bl = *32xu 41xu 44xu 45xu 26b1 26b2 38b1 12b2 other
+blconfig = []
+mode = zoo *normal
+date = "today"
+checklog_daybefore = 2
+jobspkl = None
+logwatch_interval = 30
+logwatch_once = None
+logwatch_target = local blconfig *dataset_paths_txt
+dataset_paths_txt = None
+check_all_files_exist = True
+auto_mode = True
+small_wedges = True
+batch {
+  engine = *sge pbs slurm sh auto
+  sge_pe_name = "par"
+  nproc_each = 4
+  sh_max_jobs = Auto
+}
+use_tmpdir_if_available = True
+known {
+  unit_cell = None
+  space_group = None
+  method = *not_use_first use_first symm_constraint_only correct_only
+  force = True
+}
+auto_frame_exclude_spot_based = False
+exclude_ice_resolutions = False
+anomalous = True
+engine = *xds dials
+xds {
+  use_dxtbx = False
+  minpk = None
+  exclude_resolution_range = None
+  repeat = 1
+  ex = []
+  reverse_phi = None
+  override {
+    geometry_reference = None
+    fix_geometry_when_reference_provided = False
+    rotation_axis = None
+  }
+}
+dials {
+  scan_varying = False
+}
+merging {
+  cell_grouping {
+    tol_length = None
+    tol_angle = None
+  }
+}
+split_hdf_miniset = True
+split_data_by_deg = None
+log_root = None
+auto_close = *no nogui gui
