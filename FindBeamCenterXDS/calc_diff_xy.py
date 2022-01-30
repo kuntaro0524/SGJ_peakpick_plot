@@ -4,7 +4,7 @@ import numpy as np
 lines = open(sys.argv[1],"r").readlines()
 
 for line in lines:
-    #print(line)
+    print(line)
     cols=line.split()
     cella=float(cols[4])
     cellb=float(cols[5])

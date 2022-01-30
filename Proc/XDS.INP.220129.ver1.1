@@ -8,8 +8,9 @@ X-RAY_WAVELENGTH= 1.00
 NAME_TEMPLATE_OF_DATA_FRAMES=QQQQQQ
 DATA_RANGE=1 20                                                     
 SPOT_RANGE=1 20                                                     
+!ORGX=1132.78 ORGY=1026.32 # determined in 29th Jan. 20:03
+ORGX=1026.78 ORGY=1132.32 # determined in 29th Jan. 20:03
 
-ORGX=1128 ORGY=1025 # determined in 29th Jan. 20:03
 
 SPACE_GROUP_NUMBER=0                  ! 0 if unknown
 UNIT_CELL_CONSTANTS= 27 31 33 87 108 112 ! put correct values if known
@@ -40,8 +41,11 @@ MINIMUM_NUMBER_OF_PIXELS_IN_A_SPOT=3 ! default of 6 is sometimes too high
 ! SEPMIN=4  CLUSTER_RADIUS=2 ! should be default for Pilatus and other detectors with low PSF
 ! since XDS 01-MAR-2015, POSITION supersedes DISTANCE. DISTANCE only for compatibility w/ old XDS.
 ! nowadays headers are usually correct so refine DISTANCE/POSITION in INTEGRATE but not IDXREF
+!REFINE(IDXREF)=CELL BEAM ORIENTATION AXIS ! POSITION
+!REFINE(INTEGRATE)= DISTANCE POSITION BEAM ORIENTATION ! AXIS CELL
 REFINE(IDXREF)=
 REFINE(INTEGRATE)=
+! REFINE(CORRECT)=CELL BEAM ORIENTATION AXIS DISTANCE POSITION ! Default is: refine everything
 
 ! parameters specifically for this detector and beamline:
 DETECTOR= EIGER

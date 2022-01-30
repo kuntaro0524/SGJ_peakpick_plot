@@ -12,11 +12,11 @@ h5files = glob.glob("%s/*master.h5"%data_root)
 beam_xds_template = "/data01/SGJ/220128-BL19XU/Scripts/Proc/XDS.TEMPLATE"
 
 # Beam x range
-beam_ox = 1136
-beam_oy = 1027
+beam_ox = 1133
+beam_oy = 1026
 
-beam_xs = np.arange(beam_ox-10, beam_ox+10,6)
-beam_ys = np.arange(beam_oy-10, beam_oy+10,6)
+beam_xs = np.arange(beam_ox-2, beam_ox+2.1,2)
+beam_ys = np.arange(beam_oy-2, beam_oy+2.1,2)
 
 # Divide filename to 'directory name' and so on
 
