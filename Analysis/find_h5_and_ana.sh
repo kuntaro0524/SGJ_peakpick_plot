@@ -42,7 +42,7 @@ else
 	done
 
 	cd $wd
-	python $script_path/read_log.py
+	python $script_path/read_log.py 10 
 
     else
 	    echo "Analysis had been done"
