@@ -17,6 +17,20 @@ cytidine_window05_retry_01291535_line021_master.h5  cytidine_window05_retry_0129
 
 coordinate.log
 
+## プログラム
++ make_csv_from_scan.py
++ make_csv_with_ROI.py
++ read_log.py
+
+# スクリプト
++ find_h5_and_ana.sh
+    + masterファイルを読み込んでスポットファインドを実施→ログに結果を格納
+    + ヒートマップを描ける
+    + 測定用CSVははかない
++ proc_all.sh まとめてループ処理をする→おっかけ処理ができるようにはなっているがフェイルセーフ的には良くないものだろう
++ proc_in_dir.sh　　proc_all.shが参照する各ディレクトリの中身の処理について書かれたもの。内容は find_h5_and_ana.sh　ほぼ同じ。
+　　　　+ ただし 測定に利用できる .csvをはいてくれる
+
 ## プログラムの使い方
 find_h5_and_ana.sh を走らせたら以下のことを実施
 + ディレクトリの中に master .h5 があればリストを作成（行ごとにmasterファイルがあるので行数分ファイルがあるはず）（測定を停止した際は注意）
