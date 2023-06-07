@@ -2,6 +2,9 @@
 code_files=`find . -name 'coordinate.log'`
 root_dir=$PWD
 
+cheetah_path=/oys/xtal/eiger-zmq/cheetah-eiger-zmq/eiger-zmq/bin/
+script_path=/home/bladmin/kundev/SGJ/Analysis/
+
 for code_file in $code_files; do
 wd=${code_file%/*}
 
@@ -34,12 +37,12 @@ else
     		# Log file name
     		logname="$prefix.log"
     		# Main loop
-		/oys/xtal/cheetah-eiger-zmq/eiger-zmq/bin/cheetah.local $hd5file --nproc=32 --params="cheetah.MinPixCount=4" --params="cheetah.MaxPixCount=30" --params="LocalBGRadius=20" --params="cheetah.MinSNR=3.5" > $logname
+		$cheetah_path/cheetah.local $hd5file --nproc=32 --params="cheetah.MinPixCount=4" --params="cheetah.MaxPixCount=30" --params="LocalBGRadius=20" --params="cheetah.MinSNR=3.5" > $logname
 
 	done
 
 	cd $wd
-	python /data01/SGJ/220128-BL19XU/Scripts/read_log.py
+	python $script_path/read_log.py
 
     else
 	    echo "Analysis had been done"

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import sys,os,glob
 import numpy as np
 from matplotlib import pyplot as plt
@@ -129,3 +130,4 @@ print(df_final)
 df_exc = df_final.loc[:, ['score', 'Y_value', 'Z_value']]
 #df_final.reindex(index=['score', 'Y_value', 'Z_value'])
 df_exc.to_csv("meas.csv",index=False)
+df_for_csv.to_csv("meas_all.csv",index=False)
