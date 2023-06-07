@@ -24,6 +24,7 @@ find_h5_and_ana.sh を走らせたら以下のことを実施
 + それぞれのファイルごとにcheetahを走らせて行ごとのスポットファインドログを作成する
     + スポットファインドログはmasterファイルのプレフィクスそのまま + ".log" というファイル名
     + このログファイルがあると解析は行わない　という仕様→これも要注意（解析が進まないなぁという場合、logの内容をチェックして必要なら削除すること）
++ １行毎に列座標があるが、これは coordinate.log 一行に相当しており、スキャンの結果とcoordinate.logはこのスクリプトの中で対応付けている
 + スポットファインドがリストの .h5 すべてで実施されたら、次に read_log.py が実施される
     + すべてのログファイルを読み込んでヒートマップを作成
     + 引数として　「ピークのしきい値」をとるのでスクリプト中でこの数値を変更することで「測定試料の数を決定」することもできる
@@ -41,6 +42,17 @@ find_h5_and_ana.sh を走らせたら以下のことを実施
     + これに気づいたら .log を全部消してfind_h5_and_ana.shをやり直すのが楽
     + ただ、単純に「しきい値を変えて実行し直したい」みたいな場合には、read_log.py のみ実行するという手もある。
         + 該当するfind_h5_and_ana.sh の read_log.py の部分だけ実行すれば良い（.logファイルのリストを全解析して heatmapと CSVを作る）
+
+# cheetah のパラメータチューン
+現時点での設定（2023/06/07　13:56時点）
+/oys/xtal/cheetah-eiger-zmq/eiger-zmq/bin/cheetah.local $hd5file --nproc=32 --params="cheetah.MinPixCount=4" --params="cheetah.MaxPixCount=20" --params="cheetah.MinSNR=1.9" > $logname
+
++ MinPixCount = 4
++ MaxPixCount = 20
++ MinSNR = 1.9
+
+となっている。ピークのサイズによって MinPixCount, MaxPixCount。
+ピークのSNRによって MinSNR を変更する必要がある。これは事前にシチジンのパラメータを調整した結果なので、タンパクだとどうなるか試したほうが良い。
 
 ## スクリプトのパス
 find_h5_and_ana.sh は
