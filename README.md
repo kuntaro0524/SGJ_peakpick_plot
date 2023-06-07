@@ -58,3 +58,15 @@ find_h5_and_ana.sh は
 + cheetahのパス
 + read_log.py のパス
 が正確に切れている必要があるので、必要に応じて find_h5_and_ana.sh を実行するディレクトリにコピーして内容を編集して利用するなどの工夫は必要
+
+## cheetahのインストール
+過去のcheetah関係のをインストールしようとすると多分はまる。
+このcheetahはpybind11が入っていたら走るバージョンなので最新版をインストールしたら問題ない
+### 手順
+https://github.com/keitaroyam/cheetah/tree/eiger-zmq
++ Download ZIP。
++ ZIPファイルをunzipする。
++ yamtbx.python -mpip install pybind11
++ cd eiger-zmq/
++ yamtbx.python setup.py install
+たぶんこれで走る(yamtbx.pythonは事前にインストールされている必要はある)
