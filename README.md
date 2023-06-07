@@ -33,7 +33,8 @@ find_h5_and_ana.sh を走らせたら以下のことを実施
 + heatmap_threshold.png: read_log.py の引数で指定したスコアのしきい値以上の点だけをヒートマップに描いた図
 + meas.csv : read_log.py でしきい値に設定したスコア以上を有する座標のみを .csv にしたもの →これはそのまま測定には利用できない
 
-## 続けて　make_csv_with_ROI.py　を実行する
+## 続けて　make_csv_from_scan.py　を実行する
+## (make_csv_with_ROI.pyも基本は同じだが撮りたくない座標範囲を指定する)
 + .logファイルがすべてのスキャンデータに対して出力されたら
 + python make_csv_from_scan.py を実行
     + .logファイルから情報を読み取って、ヒートマップ、collect_list.csvが出力される
