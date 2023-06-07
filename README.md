@@ -1,6 +1,5 @@
-# SGJ_peakpick_plot
-
-# Analysis/ にあるスクリプトを利用してRaster scanの結果からデータ収集用の座標CSVを出力する
+# Analysis/ 
+にあるスクリプトを利用してRaster scanの結果からデータ収集用の座標CSVを出力する
 ## プログラムを利用するための前提条件
 + scan/ディレクトリがある
 + イメージデータは .h5 である
