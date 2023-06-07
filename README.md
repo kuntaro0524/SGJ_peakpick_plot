@@ -52,10 +52,14 @@ find_h5_and_ana.sh を走らせたら以下のことを実施
 + meas.csv : read_log.py でしきい値に設定したスコア以上を有する座標のみを .csv にしたもの →これはそのまま測定には利用できない
 
 ## 続けて　make_csv_from_scan.py　を実行する
-## (make_csv_with_ROI.pyも基本は同じだが撮りたくない座標範囲を指定する)
+make_csv_with_ROI.pyも基本は同じだが撮りたくない座標範囲を指定する 
++ cheetah のログファイルを読んでフレーム番号でソートする
 + .logファイルがすべてのスキャンデータに対して出力されたら
-+ python make_csv_from_scan.py を実行
-    + .logファイルから情報を読み取って、ヒートマップ、collect_list.csvが出力される
++ cheetah の log ファイルを読む（スコアとファイル番号）
++ Read cordinate.log file
++ X,Y, Score という配列をPandas data frame へ変換
++ Z value があるしきい値よりも高い場合のもののみ dataframeを取り出す
++ 測定ソフト用のCSVファイルをかく(collect_list.csv)
 
 collect_list.csv を利用して最終データの測定を実施する 
 
