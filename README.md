@@ -32,8 +32,8 @@ coordinate.log
 + proc_all.sh まとめてループ処理をする→おっかけ処理ができるようにはなっているがフェイルセーフ的には良くないものだろう
     + ディレクトリごとに proc_in_dir.sh を実行
 + proc_in_dir.sh　　proc_all.shが参照する各ディレクトリの中身の処理について書かれたもの。内容は find_h5_and_ana.sh　ほぼ同じ。
-　　　　+ ただし 測定に利用できる .csvをはいてくれる
-　　　　+ read_log.py ではなくて、make_csv_from_scan.py を実行している
+    + ただし 測定に利用できる .csvをはいてくれる
+    + read_log.py ではなくて、make_csv_from_scan.py を実行している
 
 ## プログラムの使い方
 find_h5_and_ana.sh を走らせたら以下のことを実施
