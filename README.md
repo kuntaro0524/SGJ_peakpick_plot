@@ -17,19 +17,23 @@ cytidine_window05_retry_01291535_line021_master.h5  cytidine_window05_retry_0129
 
 coordinate.log
 
-## プログラム
+## pythonプログラム
 + make_csv_from_scan.py
 + make_csv_with_ROI.py
 + read_log.py
 
-# スクリプト
+## shellスクリプト
 + find_h5_and_ana.sh
     + masterファイルを読み込んでスポットファインドを実施→ログに結果を格納
-    + ヒートマップを描ける
+    + ヒートマップを描く
     + 測定用CSVははかない
+    + 内部でcheetahを実行
+    + 内部でread_log.pyを利用
 + proc_all.sh まとめてループ処理をする→おっかけ処理ができるようにはなっているがフェイルセーフ的には良くないものだろう
+    + ディレクトリごとに proc_in_dir.sh を実行
 + proc_in_dir.sh　　proc_all.shが参照する各ディレクトリの中身の処理について書かれたもの。内容は find_h5_and_ana.sh　ほぼ同じ。
 　　　　+ ただし 測定に利用できる .csvをはいてくれる
+　　　　+ read_log.py ではなくて、make_csv_from_scan.py を実行している
 
 ## プログラムの使い方
 find_h5_and_ana.sh を走らせたら以下のことを実施
