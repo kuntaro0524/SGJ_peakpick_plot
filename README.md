@@ -7,32 +7,18 @@
 + .h5はスキャンの各行あたりに出力されている
 + coordinate.log 測定の際に出てくる座標(ゴニオ Y,Z 座標がスキャンの行ごとに１行情報がある)
 
-# ディレクトリの構成の例
+## ディレクトリの構成の例
 cytidine_window05_retry_01291531_line001_master.h5  cytidine_window05_retry_01291535_line022_master.h5  cytidine_window05_retry_01291539_line043_master.h5
 cytidine_window05_retry_01291532_line002_master.h5  cytidine_window05_retry_01291535_line023_master.h5  cytidine_window05_retry_01291539_line044_master.h5
 cytidine_window05_retry_01291532_line003_master.h5  cytidine_window05_retry_01291535_line024_master.h5  cytidine_window05_retry_01291539_line045_master.h5
-cytidine_window05_retry_01291532_line004_master.h5  cytidine_window05_retry_01291536_line025_master.h5  cytidine_window05_retry_01291539_line046_master.h5
-cytidine_window05_retry_01291532_line005_master.h5  cytidine_window05_retry_01291536_line026_master.h5  cytidine_window05_retry_01291540_line047_master.h5
-cytidine_window05_retry_01291532_line006_master.h5  cytidine_window05_retry_01291536_line027_master.h5  cytidine_window05_retry_01291540_line048_master.h5
-cytidine_window05_retry_01291532_line007_master.h5  cytidine_window05_retry_01291536_line028_master.h5  cytidine_window05_retry_01291540_line049_master.h5
-cytidine_window05_retry_01291533_line008_master.h5  cytidine_window05_retry_01291536_line029_master.h5  cytidine_window05_retry_01291540_line050_master.h5
-cytidine_window05_retry_01291533_line009_master.h5  cytidine_window05_retry_01291537_line030_master.h5  cytidine_window05_retry_01291540_line051_master.h5
-cytidine_window05_retry_01291533_line010_master.h5  cytidine_window05_retry_01291537_line031_master.h5  cytidine_window05_retry_01291540_line052_master.h5
-cytidine_window05_retry_01291533_line011_master.h5  cytidine_window05_retry_01291537_line032_master.h5  cytidine_window05_retry_01291541_line053_master.h5
-cytidine_window05_retry_01291533_line012_master.h5  cytidine_window05_retry_01291537_line033_master.h5  cytidine_window05_retry_01291541_line054_master.h5
-cytidine_window05_retry_01291534_line013_master.h5  cytidine_window05_retry_01291537_line034_master.h5  cytidine_window05_retry_01291541_line055_master.h5
-cytidine_window05_retry_01291534_line014_master.h5  cytidine_window05_retry_01291537_line035_master.h5  cytidine_window05_retry_01291541_line056_master.h5
-cytidine_window05_retry_01291534_line015_master.h5  cytidine_window05_retry_01291538_line036_master.h5  cytidine_window05_retry_01291541_line057_master.h5
-cytidine_window05_retry_01291534_line016_master.h5  cytidine_window05_retry_01291538_line037_master.h5  cytidine_window05_retry_01291542_line058_master.h5
-cytidine_window05_retry_01291534_line017_master.h5  cytidine_window05_retry_01291538_line038_master.h5  cytidine_window05_retry_01291542_line059_master.h5
-cytidine_window05_retry_01291534_line018_master.h5  cytidine_window05_retry_01291538_line039_master.h5  cytidine_window05_retry_01291542_line060_master.h5
-cytidine_window05_retry_01291535_line019_master.h5  cytidine_window05_retry_01291538_line040_master.h5  cytidine_window05_retry_01291542_line061_master.h5
-cytidine_window05_retry_01291535_line020_master.h5  cytidine_window05_retry_01291539_line041_master.h5  cytidine_window05_retry_01291542_line062_master.h5
+....
+....
+....
 cytidine_window05_retry_01291535_line021_master.h5  cytidine_window05_retry_01291539_line042_master.h5  cytidine_window05_retry_01291542_line063_master.h5
 
 coordinate.log
 
-# プログラムの使い方
+## プログラムの使い方
 find_h5_and_ana.sh を走らせたら以下のことを実施
 + ディレクトリの中に master .h5 があればリストを作成（行ごとにmasterファイルがあるので行数分ファイルがあるはず）（測定を停止した際は注意）
 + それぞれのファイルごとにcheetahを走らせて行ごとのスポットファインドログを作成する
@@ -42,13 +28,13 @@ find_h5_and_ana.sh を走らせたら以下のことを実施
     + すべてのログファイルを読み込んでヒートマップを作成
     + 引数として　「ピークのしきい値」をとるのでスクリプト中でこの数値を変更することで「測定試料の数を決定」することもできる
 
-# プログラムの出力ファイル
+## プログラムの出力ファイル
 + heatmap_original.png : すべてのスコアをそのまま入れてヒートマップを描いた図
 + heatmap_threshold.png: read_log.py の引数で指定したスコアのしきい値以上の点だけをヒートマップに描いた図
 + meas.csv : read_log.py でしきい値に設定したスコア以上を有する座標のみを .csv にしたもの
 + meas_all.csv: すべての座標を .csvファイルにしたもの（これを直接使うことはないが、編集して利用できることはあるかも）
 
-# 使い方のコツ
+## 使い方のコツ
 + うまくいけば find_h5_and_ana.sh をスキャンディレクトリで流して終了→meas.csvをoscillation測定に利用すれば良い
 + 失敗した場合
     + 例えば、何らかの理由で cheetah が失敗してしまったら、空の.logファイルができて、再計算がうまくいかなくなる(find_h5_and_ana.sh)
@@ -56,7 +42,7 @@ find_h5_and_ana.sh を走らせたら以下のことを実施
     + ただ、単純に「しきい値を変えて実行し直したい」みたいな場合には、read_log.py のみ実行するという手もある。
         + 該当するfind_h5_and_ana.sh の read_log.py の部分だけ実行すれば良い（.logファイルのリストを全解析して heatmapと CSVを作る）
 
-# スクリプトのパス
+## スクリプトのパス
 find_h5_and_ana.sh は
 + cheetahのパス
 + read_log.py のパス
