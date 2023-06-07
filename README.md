@@ -31,8 +31,14 @@ find_h5_and_ana.sh を走らせたら以下のことを実施
 ## プログラムの出力ファイル
 + heatmap_original.png : すべてのスコアをそのまま入れてヒートマップを描いた図
 + heatmap_threshold.png: read_log.py の引数で指定したスコアのしきい値以上の点だけをヒートマップに描いた図
-+ meas.csv : read_log.py でしきい値に設定したスコア以上を有する座標のみを .csv にしたもの
-+ meas_all.csv: すべての座標を .csvファイルにしたもの（これを直接使うことはないが、編集して利用できることはあるかも）
++ meas.csv : read_log.py でしきい値に設定したスコア以上を有する座標のみを .csv にしたもの →これはそのまま測定には利用できない
+
+## 続けて　make_csv_with_ROI.py　を実行する
++ .logファイルがすべてのスキャンデータに対して出力されたら
++ python make_csv_from_scan.py を実行
+    + .logファイルから情報を読み取って、ヒートマップ、collect_list.csvが出力される
+
+collect_list.csv を利用して最終データの測定を実施する 
 
 ## 使い方のコツ
 + うまくいけば find_h5_and_ana.sh をスキャンディレクトリで流して終了→meas.csvをoscillation測定に利用すれば良い
