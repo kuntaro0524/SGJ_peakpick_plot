@@ -60,7 +60,7 @@ find_h5_and_ana.sh は
 が正確に切れている必要があるので、必要に応じて find_h5_and_ana.sh を実行するディレクトリにコピーして内容を編集して利用するなどの工夫は必要
 
 ## cheetahのインストール
-過去のcheetah関係のをインストールしようとすると多分はまる。
+過去のcheetah関係(boost_python)のは難しくてはまることが多かった
 このcheetahはpybind11が入っていたら走るバージョンなので最新版をインストールしたら問題ない
 ### 手順
 https://github.com/keitaroyam/cheetah/tree/eiger-zmq
