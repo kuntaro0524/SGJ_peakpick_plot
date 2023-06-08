@@ -63,6 +63,7 @@ make_csv_with_ROI.pyも基本は同じだが撮りたくない座標範囲を指
 
 collect_list.csv を利用して最終データの測定を実施する 
 
+
 ## 使い方のコツ
 + うまくいけば find_h5_and_ana.sh をスキャンディレクトリで流して終了→meas.csvをoscillation測定に利用すれば良い
 + 失敗した場合
@@ -81,6 +82,7 @@ collect_list.csv を利用して最終データの測定を実施する
 
 となっている。ピークのサイズによって MinPixCount, MaxPixCount。
 ピークのSNRによって MinSNR を変更する必要がある。これは事前にシチジンのパラメータを調整した結果なので、タンパクだとどうなるか試したほうが良い。
+前回はこの数値も少し編集している様子＠現場
 
 ## スクリプトのパス
 find_h5_and_ana.sh は
