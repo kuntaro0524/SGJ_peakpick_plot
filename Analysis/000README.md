@@ -8,7 +8,8 @@ simple_peaksearch.sh -> 走らせる。.h5への相対パスをheaderに書い�
 ２．終わったらマップを描くスクリプトを走らせる
 plot_results.py -> Gather .log information -> make 3D map plot -> make measurement csv.
 
-score threshold : 3 以上のものをCSVファイルに書き出す(oscillation.csv)
-threshold は ハードコード。適宜修正。
-もしくはoscillation.csvを編集しても良いかと。
+[usage]
+> python plot_results.py ../ 3.0
 
+score threshold : 第二引数で指定(float)
+好みによって、oscillation.csvを編集するのでも良い。
