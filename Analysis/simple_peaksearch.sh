@@ -3,7 +3,7 @@
 # root_dir: external setting with 'environment variants'
 # code_file: 'coordinate.log' from AMANE with its absolute path
 
-wd="."
+wd=".."
 
 # Find hd5 files
 hd5files=`find $wd -name '*master*h5'`
@@ -28,7 +28,7 @@ else
 
 		if [ ! -e $logname ]; then
 			echo "Now processing $hd5file"
-			/oys/xtal/cheetah-eiger-zmq/eiger-zmq/bin/cheetah.local $hd5file --nproc=32 --params="cheetah.MinPixCount=4" --params="cheetah.MaxPixCount=30" --params="LocalBGRadius=20" --params="cheetah.MinSNR=3.5" > $logname
+			/oys/xtal/eiger-zmq/cheetah-eiger-zmq/eiger-zmq/bin/cheetah.local $hd5file --nproc=32 --params="cheetah.MinPixCount=4" --params="cheetah.MaxPixCount=30" --params="LocalBGRadius=20" --params="cheetah.MinSNR=3.5" > $logname
 		else
 			echo "Already processed."
 		fi
