@@ -11,6 +11,8 @@ p = MakeMap.MakeMap()
 
 # output directory of cbf files
 relative_path = sys.argv[1]
+# score threshold
+threshold = float(sys.argv[2])
 
 cheetah_logs = glob.glob("%s/*master.log"%relative_path)
 df = p.prepMap(cheetah_logs, "coordinate.log")
@@ -32,7 +34,7 @@ fig.canvas.mpl_connect('button_press_event', onclick)
 plt.show()
 
 # score で thresholdを切る
-df_final = df[df['score'] > 3.0]
+df_final = df[df['score'] > threshold]
 
 # 測定用のCSVファイル
 csv_out = "oscillation.csv"
