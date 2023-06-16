@@ -1,4 +1,6 @@
 # encoding: utf-8
+import time
+import sys
 from typing import Any
 import requests
 import pandas as pd
@@ -54,15 +56,15 @@ class EIGER:
         self.isReadLocal = True
 
     def getFilesLocalWithPrefix(self, proc_dir, prefix):
-        if self.isReadLocal == False:
-            self.getFilesCurrDir(proc_dir)
+        self.getFilesCurrDir(proc_dir)
         # getFilesCurrDir() で取得した self.localFiles から prefix で始まるもの以外を削除する
         # 辞書として作成
         self.filesLocalWithPrefix = {}
         for filename in self.localFiles:
+            # print("LOCALLOCLA",filename)
             if filename.startswith(prefix):
                 self.filesLocalWithPrefix[filename] = self.localFiles[filename]
-        
+
         return self.filesLocalWithPrefix
 
     def updateServerInfo(self):
@@ -112,22 +114,46 @@ class EIGER:
         
         return filelist
 
-import sys
+    def normalProc(self, prefix, isRemove=True):
+        s_list = self.getFileListOnServerWithPrefix(prefix)
+        # print("server:", s_list)
+        # prefix のディレクトリを作成する
+        # ディレクトリ構造は prefix/scan/ とする
+        dir_to_be_checked = prefix + "/scan/"
+        if not os.path.exists(dir_to_be_checked):
+            os.makedirs(dir_to_be_checked)
+        else:
+            print("making directory is skipped")
 
-prefix = sys.argv[1]
+        print("prefix:",prefix)
+        l_list = eiger.getFilesLocalWithPrefix(dir_to_be_checked, prefix)
+        print("local:",l_list)
+
+        rmlist,dllist = eiger.getManipulateList(s_list, l_list)
+        print("To be downloaded:", dllist)
+        print("To be deleted:",rmlist)
+        eiger.getFiles(dir_to_be_checked, dllist)
+        if isRemove:
+            eiger.rmFiles(rmlist)
+        else:
+            print("No files are removed from 'isRemove'")
+
+    def getPrefixListOnServer(self):
+        file_list = eiger.getList()
+        prefix_list = []
+        for f in file_list:
+            if "master" in f:
+                #_master 以前までをprefixとして取得
+                prefix = f.split("_master")[0]
+                prefix_list.append(prefix)
+        
+        return prefix_list
 
 eiger=EIGER()
-s_list = eiger.getFileListOnServerWithPrefix(prefix)
+prefix_list = eiger.getPrefixListOnServer()
 
-# prefix のディレクトリを作成する
-# ディレクトリ構造は prefix/scan/ とする
-dir_to_be_made = prefix + "/scan/"
-if not os.path.exists(dir_to_be_made):
-    os.makedirs(dir_to_be_made)
-
-l_list = eiger.getFilesLocalWithPrefix(dir_to_be_made, prefix)
-rmlist,dllist = eiger.getManipulateList(s_list, l_list)
-print("To be downloaded:", dllist)
-print("To be deleted:",rmlist)
-eiger.getFiles(dir_to_be_made, dllist)
-eiger.rmFiles(rmlist)
+# ３回ループ
+for i in range(3):
+    for prefix in prefix_list:
+        eiger.normalProc(prefix, isRemove=False)
+    time.sleep(120)
