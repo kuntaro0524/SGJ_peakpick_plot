@@ -29,12 +29,6 @@ def onclick(event):
     print("Filename: %s" % filename_df.iloc[iy, ix])
 
 fig, ax = plt.subplots()
-sns.heatmap(pivot,cmap='RdBu')
-
-# ax1.imshow(self.matrix, cmap='hot', interpolation='none',aspect=self.aspect)
-
-fig.canvas.mpl_connect('button_press_event', onclick)
-plt.show()
 
 # score で thresholdを切る
 # 1E12 phs/frame
@@ -52,3 +46,10 @@ for index,row in df_final.iterrows():
     ofile.write("%s,%s,%s,%s\n" % (filename, int_score, int_y, int_z))
 
 ofile.close()
+
+# draw heatmap
+
+sns.heatmap(pivot,cmap='RdBu')
+fig.canvas.mpl_connect('button_press_event', onclick)
+plt.show()
+plt.savefig("heatmap.png")

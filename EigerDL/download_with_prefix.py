@@ -9,5 +9,5 @@ eigerdl = EigerDL.EigerDL()
 prefix = sys.argv[1]
 
 # ３回ループ
-for i in range(3):
-    eigerdl.normalProc(prefix, isRemove=False)
+for i in range(2):
+    eigerdl.normalProc(prefix, isRemove=True)

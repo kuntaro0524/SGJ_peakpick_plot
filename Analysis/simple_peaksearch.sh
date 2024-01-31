@@ -28,7 +28,7 @@ else
 
 		if [ ! -e $logname ]; then
 			echo "Now processing $hd5file"
-			/oys/xtal/eiger-zmq/cheetah-eiger-zmq/eiger-zmq/bin/cheetah.local $hd5file --nproc=32 --params="cheetah.MinPixCount=4" --params="cheetah.MaxPixCount=30" --params="LocalBGRadius=30" --params="cheetah.MinSNR=1.9" > $logname
+			/oys/xtal/eiger-zmq/cheetah-eiger-zmq/eiger-zmq/bin/cheetah.local $hd5file --nproc=32 --params="cheetah.MinPixCount=3" --params="cheetah.MaxPixCount=50" --params="LocalBGRadius=30" --params="cheetah.MinSNR=3.0" > $logname
 		else
 			echo "Already processed."
 		fi
