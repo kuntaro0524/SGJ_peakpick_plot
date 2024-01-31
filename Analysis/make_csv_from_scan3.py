@@ -15,11 +15,15 @@ threshold = float(sys.argv[2])
 prefix=sys.argv[3]
 
 cheetah_logs = glob.glob("%s/*master.log"%relative_path)
+
+# cheetahのログファイルと座標ログファイルを読んでいる
+# 最終的に情報を統合したPandasのDataFrameを受け取る
 df = p.prepMap(cheetah_logs, "coordinate.log")
 
 messages = df['message'].values
 
 # DataFrameを作成
+# 2次元マップを描くための準備
 pivot = df.pivot(index='Z_value', columns='Y_value', values='score')
 filename_df = df.pivot(index='h', columns='v', values='message')
 
@@ -40,7 +44,7 @@ plt.show()
 # 1E12 phs/frame
 df_final = df[df['score'] >= threshold]
 
-# 測定用のCSVファイル
+# 測定用のCSVファイルを出力する
 csv_out = "oscillation.csv"
 ofile = open(csv_out, 'w')
 

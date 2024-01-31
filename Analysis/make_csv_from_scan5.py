@@ -15,6 +15,9 @@ threshold = float(sys.argv[2])
 prefix=sys.argv[3]
 
 cheetah_logs = glob.glob("%s/*master.log"%relative_path)
+
+# cheetahのログファイルと座標ログファイルを読んでいる
+# 最終的に情報を統合したPandasのDataFrameを受け取る
 df = p.prepMap(cheetah_logs, "coordinate.log")
 
 messages = df['message'].values
@@ -30,7 +33,7 @@ def onclick(event):
 
 fig, ax = plt.subplots()
 
-# score で thresholdを切る
+# score で thresholdを切る (スポット数)
 # 1E12 phs/frame
 df_final = df[df['score'] >= threshold]
 
